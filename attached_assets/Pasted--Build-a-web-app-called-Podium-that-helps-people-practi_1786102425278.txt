@@ -1,0 +1,84 @@
+
+
+Build a web app called **"Podium"** that helps people practice public speaking and articulation by having them research and speak on random topics under timed conditions.
+
+### User Flow
+1. User lands on a home screen and picks a **topic category**.
+2. User clicks **"Shuffle"** — the topic name should rapidly cycle through several different topic titles in place, like a slot-machine text effect, for about 1-2 seconds, gradually slowing down before landing on the final selected topic. This should NOT be a circular/carousel spinning-wheel visual — just text cycling quickly in the same spot and then settling.
+3. User picks a **research timer** length: 10 min, 15 min, 20 min, 30 min, 45 min, or 60 min.
+4. A countdown timer runs while they research the topic (show a progress ring or bar, plus the topic, category, and its "angles to explore" — see Topic Bank section — visible the whole time).
+5. When research time ends (or they end it early), user picks a **speaking timer** length: 1 min, 2 min, 5 min, 10 min, or 15 min.
+6. User clicks "Start Speaking" — the app begins recording (audio and video via webcam/mic) and counts down the speaking timer.
+7. When the timer ends (or they stop early), recording stops automatically.
+8. User lands on a **results screen** where they can play back their recording, see how long they spoke, which topic/category it was, and re-do the exercise.
+9. Keep a simple **history log** of past sessions (topic, category, date, research time used, speaking time used, and a link to that recording).
+10. Add a clear, always-visible **"Back" / "Choose a different topic"** option at every stage before recording starts, so users can back out to category/topic selection instead of only moving forward. Once recording has started, disable back navigation or prompt "are you sure you want to discard this recording?" before allowing it, to avoid accidental data loss.
+
+### Topic Bank
+Build a large, wide-ranging topic bank structured as: **Category → Topic → 3-4 suggested "angles to explore"** (short sub-prompts shown during research mode to help the user go deeper — e.g. for "The French Revolution": causes and inequality, key figures, the Reign of Terror, lasting impact on modern France). Generate the 3-4 angles-to-explore for each topic yourself, appropriate to that topic.
+
+Seed the database with these categories and topics:
+
+**General & Life** — Is money the root of happiness?; Why do humans dream?; The impact of social media on friendships; Is multitasking a myth?; Nature vs. nurture in personality; The psychology of habits; What makes a good leader?; Is procrastination always bad?; The ethics of white lies; Why do we forget things?; The science of first impressions; Is competition healthy?; What is the meaning of "success"?; The impact of loneliness on health; Why do people believe in luck?
+
+**History** — The French Revolution and Marie Antoinette; The history of Nigeria; Alexander Hamilton and the U.S. financial system; The fall of the Roman Empire; The Silk Road; The Cold War; The Industrial Revolution; Ancient Egypt and the pyramids; The transatlantic slave trade; The partition of India; The fall of the Berlin Wall; The Ottoman Empire; Colonization of Africa; The Renaissance in Italy; World War I's causes; The Space Race
+
+**Architecture** — Gothic cathedrals; The Bauhaus movement; Brutalism; The Seven Wonders of the Ancient World; Sustainable/green architecture; Skyscrapers and urban density; Ancient Roman engineering; Japanese minimalist design; The architecture of mosques; Frank Lloyd Wright's philosophy; Slum housing and urban planning; Earthquake-resistant design
+
+**Nutrition & Health** — Intermittent fasting; The gut microbiome; Sugar and the brain; Hydration myths; Processed foods and health; The science of sleep; Vaccines and immunity; Mental health stigma; The placebo effect; Exercise and longevity; Food deserts; Plant-based diets
+
+**Biology** — How genes work; Cell division; Evolution by natural selection; The human genome project; Photosynthesis; The immune system; Viruses vs. bacteria; CRISPR gene editing; The human microbiome; Extremophiles; Animal migration; Neuroplasticity
+
+**Technology** — How AI models actually work; Blockchain explained simply; Quantum computing basics; History of the internet; Cybersecurity fundamentals; Self-driving cars; Social media algorithms; The ethics of facial recognition; 3D printing; Renewable energy tech; Virtual reality; The future of work with automation
+
+**Chemistry** — The periodic table's logic; Chemical bonding; Why is water "wet"?; Fermentation science; Battery chemistry; Plastics and pollution; The chemistry of cooking; Nuclear chemistry; Acids and bases in daily life; Perfume chemistry
+
+**Physics** — Black holes; Quantum mechanics for beginners; Thermodynamics in daily life; Einstein's relativity; How GPS works; The physics of sound; Nuclear fusion; String theory (basics); Why the sky is blue; Time dilation
+
+**Astronomy & Space** — Exoplanets and the search for life; The Apollo moon landing; Could we colonize Mars?; How stars are born; The Big Bang theory; Dark matter and dark energy; The James Webb telescope; Asteroid mining; The search for extraterrestrial intelligence; Life cycle of the sun
+
+**Arts & Design** — The Renaissance masters; History of jazz; Film noir; Street art as protest; Impressionism; The evolution of animation; Fashion as identity; Photography as art; Sculpture through the ages; The business of NFTs and digital art
+
+**Culture & Traditions** — Wedding rituals around the world; How language shapes thought; Food traditions and identity; Coming-of-age ceremonies globally; The history of tattoos; Religious festivals; Superstitions across cultures; Etiquette differences worldwide; Oral storytelling traditions
+
+**Geography & Earth Science** — Tectonic plates and earthquakes; Great rivers of the world; Desert ecosystems; Climate zones explained; Volcanoes; Ocean currents; Deforestation of the Amazon; Coral reefs; The world's disappearing glaciers; Migration patterns of nations
+
+**Philosophy** — Free will vs. determinism; What is justice?; The trolley problem; Existentialism explained; Utilitarianism vs. deontology; What makes something "art"?; The nature of consciousness; Stoicism in modern life; Is morality objective?; The simulation hypothesis
+
+**Psychology** — Cognitive biases; The bystander effect; Nature vs. nurture; Attachment theory; Groupthink; The psychology of persuasion; Imposter syndrome; The Stanford Prison Experiment; Emotional intelligence; Memory and false memories
+
+**Economics & Business** — Inflation explained simply; Supply and demand; Cryptocurrency's economic impact; The gig economy; Monopolies and antitrust law; Universal basic income; Behavioral economics; Startups vs. big corporations; Income inequality; Globalization's winners and losers
+
+**Politics & Law** — How elections work; Freedom of speech limits; The separation of powers; International human rights; Immigration policy debates; Capital punishment debates; Data privacy laws; Lobbying and its influence; Federalism vs. centralization; Civil disobedience through history
+
+**Mythology & Folklore** — Greek mythology's lasting influence; Norse mythology; African folklore and oral tradition; Creation myths across cultures; Dragons in world mythology; The hero's journey archetype; Egyptian gods; Native American legends
+
+**Literature** — The rise of the novel; Shakespeare's influence on language; Dystopian fiction and society; Poetry as protest; Banned books through history; Oral epics like the Odyssey; African literature's global rise; Magical realism
+
+**Music** — The history of hip-hop; Classical music's structure; How music affects mood; The evolution of Afrobeats; Music piracy and streaming economics; Instruments across cultures; The physics of sound in music; Protest songs through history
+
+**Sports** — The business of the Olympics; Doping in sports; Sports and national identity; The evolution of football/soccer tactics; Concussions in contact sports; Title IX and gender equity in sports; E-sports as a legitimate sport
+
+**Environment & Climate** — Climate change basics; Renewable vs. fossil fuels; Plastic pollution in oceans; Endangered species; Carbon offsets — do they work?; Urban sustainability; Fast fashion's environmental cost
+
+**Mathematics** — The Fibonacci sequence in nature; Why math is called the "universal language"; Probability and everyday decisions; Cryptography and prime numbers; Game theory; Infinity as a concept
+
+**Medicine & Public Health** — How vaccines are developed; Pandemics through history; Antibiotic resistance; Mental health treatment evolution; Organ transplants; Public health vs. individual freedom (mask/vaccine mandates); Genetic disorders
+
+**Linguistics & Language** — How languages evolve; Endangered languages; Sign language as a full language; Why accents exist; The origin of writing systems; Bilingualism and the brain
+
+Store all of this in a database (not hardcoded in the UI) so more topics/categories can be added later without a code change — ideally with a simple way to bulk-import more later (e.g. a CSV/spreadsheet import or admin form).
+
+### Design
+- Keep the existing color palette as-is — don't change the colors already in use. Just make sure they're applied consistently across every screen (home, category select, research mode, recording mode, results).
+- Clean, modern layout. Mobile and desktop friendly.
+- Clear visual distinction between "research mode" (calm, focused) and "recording mode" (make it obvious they're live — recording indicator, red dot, etc.)
+- Big, obvious buttons for shuffle and timer selection — minimal friction between "pick topic" and "start."
+
+### Technical Notes
+- Use the browser's microphone and camera APIs (`getUserMedia`, `MediaRecorder`) for recording; request permission clearly before the speaking timer starts.
+- Set up basic authentication (email sign-in is fine) so session history and recordings persist per user across visits.
+- Use Supabase (or another Postgres-backed service) for the topics database, user accounts, and storing session metadata + recording files/links.
+- This app runs in-browser — stick to standard web APIs and npm packages that work in a browser sandbox (no Node-only or native dependencies for anything client-facing).
+
+---
