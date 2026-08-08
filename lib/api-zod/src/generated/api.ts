@@ -78,7 +78,18 @@ export const ListSessionsResponseItem = zod.object({
   "researchSeconds": zod.number(),
   "speakingSeconds": zod.number(),
   "createdAt": zod.string(),
-  "recordingUrl": zod.string().nullable()
+  "recordingUrl": zod.string().nullable(),
+  "transcript": zod.string().nullable(),
+  "fillerCount": zod.number().nullable(),
+  "fillersPerMinute": zod.number().nullable(),
+  "eyeContactPercent": zod.number().nullable(),
+  "postureScore": zod.number().nullable(),
+  "stillnessScore": zod.number().nullable(),
+  "visualSamples": zod.number().nullable(),
+  "feedbackSummary": zod.string().nullable(),
+  "feedbackStrengths": zod.array(zod.string()).nullable(),
+  "feedbackImprovements": zod.array(zod.string()).nullable(),
+  "feedbackNextTip": zod.string().nullable()
 })
 export const ListSessionsResponse = zod.array(ListSessionsResponseItem)
 
@@ -98,7 +109,18 @@ export const CreateSessionBody = zod.object({
   "topicId": zod.number(),
   "researchSeconds": zod.number().min(createSessionBodyResearchSecondsMin),
   "speakingSeconds": zod.number().min(createSessionBodySpeakingSecondsMin),
-  "recordingUrl": zod.string().nullish()
+  "recordingUrl": zod.string().nullish(),
+  "transcript": zod.string().nullish(),
+  "fillerCount": zod.number().nullish(),
+  "fillersPerMinute": zod.number().nullish(),
+  "eyeContactPercent": zod.number().nullish(),
+  "postureScore": zod.number().nullish(),
+  "stillnessScore": zod.number().nullish(),
+  "visualSamples": zod.number().nullish(),
+  "feedbackSummary": zod.string().nullish(),
+  "feedbackStrengths": zod.array(zod.string()).optional(),
+  "feedbackImprovements": zod.array(zod.string()).optional(),
+  "feedbackNextTip": zod.string().nullish()
 })
 
 export const CreateSessionResponse = zod.object({
@@ -110,7 +132,18 @@ export const CreateSessionResponse = zod.object({
   "researchSeconds": zod.number(),
   "speakingSeconds": zod.number(),
   "createdAt": zod.string(),
-  "recordingUrl": zod.string().nullable()
+  "recordingUrl": zod.string().nullable(),
+  "transcript": zod.string().nullable(),
+  "fillerCount": zod.number().nullable(),
+  "fillersPerMinute": zod.number().nullable(),
+  "eyeContactPercent": zod.number().nullable(),
+  "postureScore": zod.number().nullable(),
+  "stillnessScore": zod.number().nullable(),
+  "visualSamples": zod.number().nullable(),
+  "feedbackSummary": zod.string().nullable(),
+  "feedbackStrengths": zod.array(zod.string()).nullable(),
+  "feedbackImprovements": zod.array(zod.string()).nullable(),
+  "feedbackNextTip": zod.string().nullable()
 })
 
 

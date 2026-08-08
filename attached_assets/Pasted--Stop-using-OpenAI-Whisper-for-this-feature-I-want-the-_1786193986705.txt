@@ -1,0 +1,32 @@
+
+Stop using OpenAI/Whisper for this feature. I want the entire feedback layer to run for free, with no external API keys, no billing, and no paid services of any kind. Replace the approach as follows:
+
+## 1. Transcription — use the browser's built-in Web Speech API
+Use the native `SpeechRecognition` (`webkitSpeechRecognition` in Chrome) browser API instead of any external transcription service. This runs for free with no API key. Capture the transcript live while the user is speaking (during the recording timer), and store the final transcript text alongside the session.
+
+Note in the UI (small, non-blocking text is fine) that live transcription works best in Chrome/Edge, since this API isn't reliably supported in Safari or Firefox — if the browser doesn't support it, skip transcription gracefully for that session rather than erroring out.
+
+## 2. Filler word counting — plain JavaScript, no AI call
+Once you have the transcript text, count filler words/phrases (um, uh, like, you know, so, basically, actually) using simple string/regex matching in JavaScript. Calculate total count and a "fillers per minute" rate from this. No AI model needed for this step at all.
+
+## 3. Body language analysis — use MediaPipe (free, runs in-browser)
+Use Google's MediaPipe Tasks Vision library (Pose Landmarker and Face Landmarker), loaded client-side, to analyze the recorded video for:
+- Eye contact — approximate how much of the time the face is oriented toward the camera.
+- Posture — whether the shoulders/spine appear upright vs. slouched.
+- Stillness/fidgeting — how much position changes frame to frame.
+
+This runs entirely in the browser with no API key and no per-use cost.
+
+## 4. Feedback summary — template-based, not AI-generated
+Instead of calling an AI model to write the summary, generate it from a set of pre-written templates that fill in the actual numbers, for example:
+- If filler rate is high: "You said filler words like 'um' {count} times in {minutes} minutes — that's about {rate} per minute. Try pausing silently instead of filling the gap."
+- If filler rate is low: "Great control on filler words — only {count} in {minutes} minutes."
+- If eye contact percentage is low: "You looked at the camera about {percent}% of the time. Try picking a spot near the camera lens to focus on."
+- Similarly for posture and stillness.
+
+Write 3-5 template variations per metric so the feedback doesn't feel robotic or repetitive across sessions, and combine 2-3 of the most relevant ones (don't show every possible template every time — pick the ones that are most notable for that session, both a strength and an area to improve).
+
+## 5. Remove any OpenAI/paid-API dependencies
+Remove any environment variable, secret, or code path that expects an OpenAI API key or any other paid service for this feature. The entire feedback layer should run with zero external accounts, zero billing setup, and zero per-use cost — everything happens client-side in the browser or with plain JavaScript logic.
+
+Keep everything else about the results screen the same: show the transcript (with fillers highlighted), the feedback summary, and save it all to session history so users can track filler-rate trends over time.

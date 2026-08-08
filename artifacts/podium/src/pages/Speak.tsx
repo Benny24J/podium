@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Check, Mic, MicOff, ShieldCheck, Square, Video } from 'lucide-react';
 import { useLocation } from 'wouter';
-import { loadFlow, saveFlow, formatSeconds } from '@/lib/session';
+import { loadFlow, saveFlow, formatSeconds, saveRecordingBlob } from '@/lib/session';
 import { PodiumShell, PageError } from '@/components/PodiumShell';
 
 export default function Speak() {
@@ -28,7 +28,7 @@ export default function Speak() {
     chunksRef.current = [];
     const recorder = new MediaRecorder(stream);
     recorder.ondataavailable = (event) => { if (event.data.size) chunksRef.current.push(event.data); };
-    recorder.onstop = () => { const blob = new Blob(chunksRef.current, { type: recorder.mimeType || 'video/webm' }); const url = URL.createObjectURL(blob); saveFlow({ ...flow, speakingElapsed: elapsed, recordingUrl: url }); setLocation('/results'); };
+    recorder.onstop = async () => { const blob = new Blob(chunksRef.current, { type: recorder.mimeType || 'video/webm' }); const recordingId = crypto.randomUUID(); const url = URL.createObjectURL(blob); await saveRecordingBlob(recordingId, blob); saveFlow({ ...flow, speakingElapsed: elapsed, recordingUrl: url, recordingId }); setLocation('/results'); };
     recorder.start(); recorderRef.current = recorder; setRecording(true);
   }
   function stopRecording() {

@@ -2,6 +2,7 @@ import { createInsertSchema } from "drizzle-zod";
 import {
   integer,
   pgTable,
+  real,
   serial,
   text,
   timestamp,
@@ -41,6 +42,17 @@ export const sessionsTable = pgTable("podium_sessions", {
   researchSeconds: integer("research_seconds").notNull(),
   speakingSeconds: integer("speaking_seconds").notNull(),
   recordingUrl: text("recording_url"),
+  transcript: text("transcript"),
+  fillerCount: integer("filler_count"),
+  fillersPerMinute: real("fillers_per_minute"),
+  eyeContactPercent: integer("eye_contact_percent"),
+  postureScore: integer("posture_score"),
+  stillnessScore: integer("stillness_score"),
+  visualSamples: integer("visual_samples"),
+  feedbackSummary: text("feedback_summary"),
+  feedbackStrengths: text("feedback_strengths").array(),
+  feedbackImprovements: text("feedback_improvements").array(),
+  feedbackNextTip: text("feedback_next_tip"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),

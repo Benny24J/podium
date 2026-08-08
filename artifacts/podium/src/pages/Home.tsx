@@ -34,7 +34,7 @@ export default function Home() {
   function shuffle() { random.refetch().then((result) => { if (result.data) chooseTopic(result.data); }); }
   function begin() {
     if (!selectedTopic) return;
-    saveFlow({ topic: selectedTopic, researchSeconds, speakingSeconds, researchElapsed: 0, speakingElapsed: 0, recordingUrl: null });
+    saveFlow({ topic: selectedTopic, researchSeconds, speakingSeconds, researchElapsed: 0, speakingElapsed: 0, recordingUrl: null, recordingId: null });
     setLocation('/research');
   }
 

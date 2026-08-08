@@ -16,4 +16,24 @@ export interface SessionInput {
   speakingSeconds: number;
   /** @nullable */
   recordingUrl?: string | null;
+  /** @nullable */
+  transcript?: string | null;
+  /** @nullable */
+  fillerCount?: number | null;
+  /** @nullable */
+  fillersPerMinute?: number | null;
+  /** @nullable */
+  eyeContactPercent?: number | null;
+  /** @nullable */
+  postureScore?: number | null;
+  /** @nullable */
+  stillnessScore?: number | null;
+  /** @nullable */
+  visualSamples?: number | null;
+  /** @nullable */
+  feedbackSummary?: string | null;
+  feedbackStrengths?: string[];
+  feedbackImprovements?: string[];
+  /** @nullable */
+  feedbackNextTip?: string | null;
 }

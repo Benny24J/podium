@@ -143,6 +143,17 @@ router.get("/sessions", async (req, res): Promise<void> => {
       speakingSeconds: sessionsTable.speakingSeconds,
       createdAt: sessionsTable.createdAt,
       recordingUrl: sessionsTable.recordingUrl,
+      transcript: sessionsTable.transcript,
+      fillerCount: sessionsTable.fillerCount,
+      fillersPerMinute: sessionsTable.fillersPerMinute,
+      eyeContactPercent: sessionsTable.eyeContactPercent,
+      postureScore: sessionsTable.postureScore,
+      stillnessScore: sessionsTable.stillnessScore,
+      visualSamples: sessionsTable.visualSamples,
+      feedbackSummary: sessionsTable.feedbackSummary,
+      feedbackStrengths: sessionsTable.feedbackStrengths,
+      feedbackImprovements: sessionsTable.feedbackImprovements,
+      feedbackNextTip: sessionsTable.feedbackNextTip,
     })
     .from(sessionsTable)
     .innerJoin(topicsTable, eq(topicsTable.id, sessionsTable.topicId))
@@ -186,6 +197,17 @@ router.post("/sessions", async (req, res): Promise<void> => {
       speakingSeconds: sessionsTable.speakingSeconds,
       createdAt: sessionsTable.createdAt,
       recordingUrl: sessionsTable.recordingUrl,
+      transcript: sessionsTable.transcript,
+      fillerCount: sessionsTable.fillerCount,
+      fillersPerMinute: sessionsTable.fillersPerMinute,
+      eyeContactPercent: sessionsTable.eyeContactPercent,
+      postureScore: sessionsTable.postureScore,
+      stillnessScore: sessionsTable.stillnessScore,
+      visualSamples: sessionsTable.visualSamples,
+      feedbackSummary: sessionsTable.feedbackSummary,
+      feedbackStrengths: sessionsTable.feedbackStrengths,
+      feedbackImprovements: sessionsTable.feedbackImprovements,
+      feedbackNextTip: sessionsTable.feedbackNextTip,
     })
     .from(sessionsTable)
     .innerJoin(topicsTable, eq(topicsTable.id, sessionsTable.topicId))

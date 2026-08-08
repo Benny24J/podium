@@ -176,7 +176,7 @@ components:
             type: string
     Session:
       type: object
-      required: [id, sessionKey, topicId, topicTitle, categoryName, researchSeconds, speakingSeconds, createdAt, recordingUrl]
+      required: [id, sessionKey, topicId, topicTitle, categoryName, researchSeconds, speakingSeconds, createdAt, recordingUrl, transcript, fillerCount, fillersPerMinute, eyeContactPercent, postureScore, stillnessScore, visualSamples, feedbackSummary, feedbackStrengths, feedbackImprovements, feedbackNextTip]
       properties:
         id:
           type: number
@@ -196,6 +196,32 @@ components:
           type: string
         recordingUrl:
           type: ["string", "null"]
+        transcript:
+          type: ["string", "null"]
+        fillerCount:
+          type: ["number", "null"]
+        fillersPerMinute:
+          type: ["number", "null"]
+        eyeContactPercent:
+          type: ["number", "null"]
+        postureScore:
+          type: ["number", "null"]
+        stillnessScore:
+          type: ["number", "null"]
+        visualSamples:
+          type: ["number", "null"]
+        feedbackSummary:
+          type: ["string", "null"]
+        feedbackStrengths:
+          type: ["array", "null"]
+          items:
+            type: string
+        feedbackImprovements:
+          type: ["array", "null"]
+          items:
+            type: string
+        feedbackNextTip:
+          type: ["string", "null"]
     SessionInput:
       type: object
       required: [sessionKey, topicId, researchSeconds, speakingSeconds]
@@ -212,6 +238,32 @@ components:
           type: number
           minimum: 0
         recordingUrl:
+          type: ["string", "null"]
+        transcript:
+          type: ["string", "null"]
+        fillerCount:
+          type: ["number", "null"]
+        fillersPerMinute:
+          type: ["number", "null"]
+        eyeContactPercent:
+          type: ["number", "null"]
+        postureScore:
+          type: ["number", "null"]
+        stillnessScore:
+          type: ["number", "null"]
+        visualSamples:
+          type: ["number", "null"]
+        feedbackSummary:
+          type: ["string", "null"]
+        feedbackStrengths:
+          type: array
+          items:
+            type: string
+        feedbackImprovements:
+          type: array
+          items:
+            type: string
+        feedbackNextTip:
           type: ["string", "null"]
     SessionSummary:
       type: object
