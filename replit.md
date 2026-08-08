@@ -1,6 +1,6 @@
-# [Project name]
+# Podium
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Podium helps people practice public speaking by researching a random topic under pressure, recording a timed take, and reviewing their progress.
 
 ## Run & Operate
 
@@ -22,23 +22,30 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/podium` — the responsive Podium web app and browser recording flow
+- `artifacts/api-server` — topic bank and session history API
+- `lib/api-spec/openapi.yaml` — source of truth for the API contract
+- `lib/db/src/schema/podium.ts` — PostgreSQL topic and session tables
+- `artifacts/api-server/src/lib/podium-seed.ts` — idempotent seed for the supplied topic bank
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The first build uses a stable browser session key rather than local passwords or unapproved authentication, keeping history scoped to the current browser.
+- Topic content is seeded into PostgreSQL and served through the API so categories and prompts can grow without UI changes.
+- Recordings use browser `getUserMedia` and `MediaRecorder`; the current preview keeps the recording blob local while saving session metadata through the API.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Users can browse a broad topic bank, shuffle a prompt, choose research and speaking timers, review suggested angles, grant camera/microphone permission, record a timed video take, play it back, save metadata, and revisit session history.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+No additional preferences recorded.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Run `pnpm --filter @workspace/api-spec run codegen` after changing `lib/api-spec/openapi.yaml`.
+- Replit preview workflows provide the required `PORT` and `BASE_PATH`; do not run the Vite app from the workspace root.
 
 ## Pointers
 

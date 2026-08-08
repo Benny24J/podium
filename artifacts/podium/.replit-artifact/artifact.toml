@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Podium"
+description = "A focused public-speaking practice app that pairs random research topics with timed speaking exercises, webcam recording, playback, and session history."
+version = "1.0.0"
+id = "artifacts/podium"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24922
+
+[services.development]
+run = "pnpm --filter @workspace/podium run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/podium", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/podium/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24922"
+BASE_PATH = "/"

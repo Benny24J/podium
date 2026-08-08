@@ -10,6 +10,10 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: topics
+    description: Topic bank operations
+  - name: sessions
+    description: Speaking session operations
 paths:
   /healthz:
     get:
@@ -24,6 +28,115 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [topics]
+      summary: List topic categories
+      responses:
+        "200":
+          description: Topic categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+  /topics:
+    get:
+      operationId: listTopics
+      tags: [topics]
+      summary: List topics, optionally filtered by category
+      parameters:
+        - name: categoryId
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Topic bank entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Topic"
+  /topics/random:
+    get:
+      operationId: getRandomTopic
+      tags: [topics]
+      summary: Pick a random topic
+      parameters:
+        - name: categoryId
+          in: query
+          required: false
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Random topic
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Topic"
+        "404":
+          description: No topics found
+  /sessions:
+    get:
+      operationId: listSessions
+      tags: [sessions]
+      summary: List recent speaking sessions
+      parameters:
+        - name: sessionKey
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Recent sessions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Session"
+    post:
+      operationId: createSession
+      tags: [sessions]
+      summary: Save a speaking session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SessionInput"
+      responses:
+        "201":
+          description: Saved session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+  /sessions/summary:
+    get:
+      operationId: getSessionSummary
+      tags: [sessions]
+      summary: Get speaking practice summary
+      parameters:
+        - name: sessionKey
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Practice summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionSummary"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +146,83 @@ components:
           type: string
       required:
         - status
+    Category:
+      type: object
+      required: [id, name, description, topicCount]
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        topicCount:
+          type: number
+    Topic:
+      type: object
+      required: [id, categoryId, categoryName, title, angles]
+      properties:
+        id:
+          type: number
+        categoryId:
+          type: number
+        categoryName:
+          type: string
+        title:
+          type: string
+        angles:
+          type: array
+          items:
+            type: string
+    Session:
+      type: object
+      required: [id, sessionKey, topicId, topicTitle, categoryName, researchSeconds, speakingSeconds, createdAt, recordingUrl]
+      properties:
+        id:
+          type: number
+        sessionKey:
+          type: string
+        topicId:
+          type: number
+        topicTitle:
+          type: string
+        categoryName:
+          type: string
+        researchSeconds:
+          type: number
+        speakingSeconds:
+          type: number
+        createdAt:
+          type: string
+        recordingUrl:
+          type: ["string", "null"]
+    SessionInput:
+      type: object
+      required: [sessionKey, topicId, researchSeconds, speakingSeconds]
+      properties:
+        sessionKey:
+          type: string
+          minLength: 1
+        topicId:
+          type: number
+        researchSeconds:
+          type: number
+          minimum: 0
+        speakingSeconds:
+          type: number
+          minimum: 0
+        recordingUrl:
+          type: ["string", "null"]
+    SessionSummary:
+      type: object
+      required: [sessionCount, totalSpeakingSeconds, totalResearchSeconds, favoriteCategory]
+      properties:
+        sessionCount:
+          type: number
+        totalSpeakingSeconds:
+          type: number
+        totalResearchSeconds:
+          type: number
+        favoriteCategory:
+          type: ["string", "null"]
 
