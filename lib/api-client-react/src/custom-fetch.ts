@@ -322,6 +322,8 @@ async function parseSuccessBody(
   }
 }
 
+import { handleLocalApi } from "./mock-backend";
+
 export async function customFetch<T = unknown>(
   input: RequestInfo | URL,
   options: CustomFetchOptions = {},
@@ -360,12 +362,25 @@ export async function customFetch<T = unknown>(
 
   const requestInfo = { method, url: resolveUrl(input) };
 
-  const response = await fetch(input, { ...init, method, headers });
+  try {
+    const response = await fetch(input, { ...init, method, headers });
 
-  if (!response.ok) {
-    const errorData = await parseErrorBody(response, method);
-    throw new ApiError(response, errorData, requestInfo);
+    if (!response.ok) {
+      const localResult = handleLocalApi(requestInfo.url, { method, body: init.body });
+      if (localResult !== null) {
+        return localResult as T;
+      }
+
+      const errorData = await parseErrorBody(response, method);
+      throw new ApiError(response, errorData, requestInfo);
+    }
+
+    return (await parseSuccessBody(response, responseType, requestInfo)) as T;
+  } catch (err) {
+    const localResult = handleLocalApi(requestInfo.url, { method, body: init.body });
+    if (localResult !== null) {
+      return localResult as T;
+    }
+    throw err;
   }
-
-  return (await parseSuccessBody(response, responseType, requestInfo)) as T;
 }
